@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bowling Turnuvası</title>
+  <meta name="theme-color" content="#0b0820">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎳</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="game.js"></script>
+</head>
+<body>
+  <main id="home" class="home">
+    <header class="hero">
+      <div class="eyebrow">Yönetim Ekibi</div>
+      <h1>Bowling<br>Turnuvası</h1>
+      <p class="prize">🎟️ En yüksek skoru yapan <b>2 kişi</b> bowling kartını kazanır</p>
+      <div id="countdown" class="countdown">&nbsp;</div>
+    </header>
+
+    <form id="startForm" class="card start">
+      <label for="name">Adın Soyadın</label>
+      <input id="name" maxlength="24" autocomplete="name" placeholder="Örn. Ayşe Yılmaz" required>
+      <button id="playBtn" type="submit">Oyna</button>
+      <p class="note">İstediğin kadar oynayabilirsin, tabloda en iyi skorun görünür.</p>
+    </form>
+
+    <div id="winners" class="card winners" hidden></div>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>Skor Tablosu</h2>
+        <button id="refreshBtn" class="ghost small" type="button" aria-label="Yenile">↻</button>
+      </div>
+      <ol id="board" class="board"></ol>
+    </section>
+
+    <details class="card how">
+      <summary>Nasıl oynanır?</summary>
+      <ol>
+        <li>Parmağını / fareni sağa sola sürükleyerek topun yerini seç.</li>
+        <li><b>Yön:</b> ok sağa sola gider, dokununca sabitlenir.</li>
+        <li><b>Güç:</b> çubuk dolup boşalır, dokununca sabitlenir.</li>
+        <li><b>Falso:</b> topun ne yöne ve ne kadar döneceği. Dokununca atış yapılır.</li>
+        <li>Bilgisayarda dokunmak yerine <kbd>Boşluk</kbd>, sürüklemek yerine <kbd>←</kbd> <kbd>→</kbd> tuşları.</li>
+      </ol>
+      <p>İpucu: Falsolu top, 1 numaralı lobutun hemen yanına (cebe) açılı girerse strike ihtimali çok artar. Tam ortadan vurmak split bırakabilir.</p>
+      <p>Eşitlik olursa o skoru daha önce yapan önde sayılır.</p>
+    </details>
+  </main>
+
+  <main id="game" class="game" hidden>
+    <div class="topbar">
+      <button id="quitBtn" class="ghost small" type="button" aria-label="Oyundan çık">✕</button>
+      <div id="frames" class="frames"></div>
+    </div>
+    <div id="stage" class="stage">
+      <canvas id="lane"></canvas>
+      <div id="hint" class="hint"></div>
+      <div id="powerMeter" class="meter power"><div class="fill"></div><span>Güç</span></div>
+      <div id="spinMeter" class="meter spin"><div class="needle"></div><span>◀ Falso ▶</span></div>
+      <div id="banner" class="banner"></div>
+    </div>
+  </main>
+
+  <div id="over" class="overlay" hidden>
+    <div class="card over-card">
+      <div id="overTitle" class="over-title"></div>
+      <div id="overScore" class="over-score"></div>
+      <p id="overInfo" class="over-info"></p>
+      <button id="againBtn" type="button">Tekrar Oyna</button>
+      <button id="homeBtn" class="ghost" type="button">Skor Tablosu</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+</body>
+</html>
